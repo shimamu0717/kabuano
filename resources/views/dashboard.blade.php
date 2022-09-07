@@ -12,7 +12,7 @@
           あの時あの株を買っとけばいくらになってたのだろう？
           そう思ったときにカンタンに株価を調べられるアプリです。
         </p>
-        <a href="" class="btn btn-lg btn-warning">分析開始</a>
+        <a href="{{ route('analyze.create') }}" class="btn btn-lg btn-warning">分析開始</a>
       </div>
     </div>
   </div>
