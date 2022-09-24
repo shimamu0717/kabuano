@@ -8,4 +8,4 @@
 
 その場合は、このメールは破棄していただいて結構です。
 
-kabuano({{ url(config('app.url')) }})
+memo({{ url(config('app.url')) }})

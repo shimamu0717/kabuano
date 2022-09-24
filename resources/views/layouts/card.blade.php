@@ -1,4 +1,4 @@
-<a class="card mx-1" style="width: 18rem" data-toggle="modal" data-target="#modal-show-{{ $analyze->id }}">
+<a class="card mr-auto" style="width: 18rem" data-toggle="modal" data-target="#modal-show-{{ $analyze->id }}">
     <div class="card-header card-header-info text-center">
     </div>
     <div class="card-body">
