@@ -7,6 +7,9 @@ use App\Models\analyze;
 
 class AnalyzeController extends Controller
 {
+    public function __construct() {
+        $this->authorizeResource(analyze::class, 'analyze');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -30,21 +33,32 @@ class AnalyzeController extends Controller
 
     public function start(Request $request)
     {
+        $request->validate([
+            'code' => 'required | numeric',
+            'start_date' => 'required | date | before_or_equal:today |  before_or_equal:end_date',
+            'end_date' => 'required | date | before_or_equal:today | after_or_equal:start_date',
+        ]);
         $path = app_path() . "/python/test.py";
-        // $command =  "python3 " . $path;
-        $command =  "python3 -m pip -V" ;
+        $code = $request->code;
+        $star_date = $request->start_date;
+        $start_open_or_close = $request->start_open_or_close;
+        $end_date = $request->end_date;
+        $end_open_or_close = $request->end_open_or_close;
+        $command =  "python3 " . $path . " $code" . " $star_date" . " $start_open_or_close" . " $end_date" . " $end_open_or_close";
         exec($command, $output);
-        dd($output);
-        $inputs = $request->except('_token');
+
+        if (empty($output)){
+            return back()->withInput()->with('no_data', '銘柄コード、日付を正しく入力してください');
+        }
         $result = [
-            'company' => 'hoge',
-            'start_price' => 100,
-            'end_price' => 110 ,
-            'high' => 120 ,
-            'low' => 90 ,
-            'yield' => 10 ,
-            'yield_ratio' => 10
+            'start_price' => $output[0] ,
+            'end_price' => $output[1] ,
+            'yield' => $output[2] ,
+            'yield_ratio' => $output[3] ,
+            'high' => $output[4] ,
+            'low' => $output[5] ,
         ];
+        $inputs = $request->except('_token');
 
         $request->session()->put($inputs);
         $request->session()->put($result);
@@ -95,9 +109,10 @@ class AnalyzeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, analyze $analyze)
     {
-        //
+        $analyze->fill($request->all())->save();
+        return redirect()->route('home');
     }
 
     /**
@@ -106,8 +121,9 @@ class AnalyzeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(analyze $analyze)
     {
-        //
+        $analyze->delete();
+        return redirect()->route('home');
     }
 }

@@ -153,6 +153,11 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'code' => '銘柄コード',
+        'start_date' => '開始日',
+        'end_date' => '終了日',
+
+    ],
 
 ];

@@ -13,7 +13,7 @@
     <ul class="nav">
 
       <li class="nav-item">
-        <a class="nav-link" href="">
+        <a class="nav-link" href="{{ route('analyze.create') }}">
           <i class="material-icons">content_paste</i>
             <p>新規分析</p>
         </a>

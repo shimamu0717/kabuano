@@ -17,12 +17,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Auth::routes();
-Route::resource('analyze', App\Http\Controllers\AnalyzeController::class);
-Route::post('analyze/start', [App\Http\Controllers\AnalyzeController::class, 'start'])->name('analyze.start');
-Route::get('analyze/result', [App\Http\Controllers\AnalyzeController::class, 'result'])->name('analyze.result');
-
-Route::group(['middleware' => 'auth'], function () {
-	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'App\Http\Controllers\ProfileController@edit']);
-	Route::put('profile', ['as' => 'profile.update', 'uses' => 'App\Http\Controllers\ProfileController@update']);
-	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
-});
+Route::resource('analyze', App\Http\Controllers\AnalyzeController::class)->except('index','edit','show');
+Route::post('analyze/create', [App\Http\Controllers\AnalyzeController::class, 'start'])->name('analyze.start');
+Route::get('analyze', [App\Http\Controllers\AnalyzeController::class, 'result'])->name('analyze.result');

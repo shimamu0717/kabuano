@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\analyze;
+
 class HomeController extends Controller
 {
     /**
@@ -21,6 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+        $analyzes = analyze::all()->sortByDesc('created_at');
+        return view('home', ['analyzes' => $analyzes]);
     }
 }
