@@ -1,7 +1,8 @@
 @extends('layouts.app')
+@section('title', 'ログイン')
 
 @section('content')
-<div class="content">
+<div class="content pt-5">
   <div class="container">
     <div class="row align-items-center">
       <div class="col-lg-4 col-md-6 col-sm-8 ml-auto mr-auto">
@@ -12,7 +13,7 @@
             <div class="card-header card-header-primary text-center">
               <h4 class="card-title"><strong>ログイン</strong></h4>
               <div class="social-line">
-                <a href="#pablo" class="btn btn-just-icon btn-link btn-white">
+                <a href="{{ route('login.{provider}', ['provider' => 'google']) }}" class="btn btn-just-icon btn-link btn-white">
                   <i class="fa fa-google-plus"></i>
                 </a>
               </div>

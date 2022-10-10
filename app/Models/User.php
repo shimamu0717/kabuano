@@ -7,6 +7,7 @@ use App\Mail\BareMail;
 use App\Notifications\PasswordResetNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
@@ -48,4 +49,10 @@ class User extends Authenticatable
     {
         $this->notify(new PasswordResetNotification($token, new BareMail()));
     }
+
+    public function favorites(): BelongsToMany
+    {
+        return $this->belongsToMany('App\Models\analyze', 'favorites');
+    }
+
 }

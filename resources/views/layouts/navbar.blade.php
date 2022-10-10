@@ -1,22 +1,22 @@
-<!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
   <div class="container-fluid">
 
     <div class="collapse navbar-collapse justify-content-end bg-white" >
 
       <ul class="navbar-nav">
+        @auth()
         <li class="nav-item">
-          <a class="nav-link" href="">
-              使い方
+          <a class="nav-link" href="{{ route('home') }}">
+              マイ分析
           </a>
         </li>
 
-        @auth()
         <li class="nav-item">
-          <a class="nav-link" href="">
-              マイページ
-          </a>
+          <button class="btn btn-link nav-link" form="logout-form" type="submit">
+              ログアウト
+          </button>
         </li>
+
         @endauth
 
         @guest()
@@ -32,7 +32,7 @@
         </li>
         @endguest
 
-        <li class="nav-item dropdown">
+        {{-- <li class="nav-item dropdown">
           <a class="nav-link" href="#pablo" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="material-icons">person</i>
             <p class="d-lg-none d-md-block">
@@ -44,7 +44,7 @@
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">{{ __('ログアウト') }}</a>
           </div>
-        </li>
+        </li> --}}
       </ul>
     </div>
   </div>

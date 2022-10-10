@@ -10,7 +10,12 @@
           <p>{{ $analyze->comment }}</p>
       </div>
     </div>
-    <div class="card-footer ">
+    <div class="card-footer">
+        <Favorite
+         :initial-is-favorite-by='@json($analyze->isFavoriteBy(Auth::user()))'
+         :authorized='@json(Auth::check())'
+         endpoint="{{ route('analyzes.favorite', ['analyze' => $analyze]) }}"
+        ></Favorite>
         <div class="">{{ $analyze->created_at->format('Y/m/d') }}</div>
         <div class="">{{ $analyze->user->name }}</div>
     </div>

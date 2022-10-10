@@ -1,8 +1,8 @@
 @extends('layouts.app')
+@section('title', 'ようこそkubuanoへ')
 
 @section('content')
-  @guest
-  <div class="content">
+  <div class="content pt-5">
     <div class="container">
       <div class="card">
         <div class="card-header card-header-primary">
@@ -19,18 +19,4 @@
       </div>
     </div>
   </div>
-  @endguest
-
-  @auth
-    <div class="container-fluid pt-5">
-      <div>
-        <h3>分析一覧</h3>
-      </div>
-      <div class="d-flex flex-wrap">
-        @foreach ($analyzes as $analyze)
-        @include('layouts.card')
-        @endforeach
-      </div>
-    </div>
-  @endauth
 @endsection

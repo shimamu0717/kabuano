@@ -2,7 +2,7 @@
 @section('title', '分析結果')
 
 @section('content')
-<div class="content">
+<div class="content pt-5">
   <div class="container">
     <div class="row align-items-center">
       <div class="col-lg-6 col-md-6 col-sm-8 ml-auto mr-auto">
@@ -82,7 +82,12 @@
                   <p>{{ session('comment') }}</p>
               </div>
               <div class="card-footer justify-content-center">
+                @auth
                 <button type="submit"  formmethod="POST" formaction="{{ route('analyze.store') }}" class="btn btn-info btn-lg mr-4">{{ __('　保存　') }}</button>
+                @endauth
+                @guest
+                <button type="submit"  formmethod="GET" formaction="{{ route('login') }}" class="btn btn-info btn-lg mr-4">{{ __('ログイン') }}</button>
+                @endguest
                 <button type="submit" formmethod="GET" formaction="{{ route('analyze.create') }}" class="btn btn-outline-info btn-lg ml-4">{{ __('キャンセル') }}</button>
               </div>
             </div>

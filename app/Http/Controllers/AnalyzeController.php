@@ -126,4 +126,23 @@ class AnalyzeController extends Controller
         $analyze->delete();
         return redirect()->route('home');
     }
+
+    public function favorite(Request $request, analyze $analyze)
+    {
+        $analyze->favorites()->detach($request->user()->id);
+        $analyze->favorites()->attach($request->user()->id);
+
+        return[
+            'id' => $analyze->id,
+        ];
+    }
+
+    public function unfavorite(Request $request, analyze $analyze)
+    {
+        $analyze->favorites()->detach($request->user()->id);
+
+        return[
+            'id' => $analyze->id,
+        ];
+    }
 }

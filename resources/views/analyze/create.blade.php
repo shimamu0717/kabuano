@@ -2,7 +2,7 @@
 @section('title', '新規分析')
 
 @section('content')
-<div class="content">
+<div class="content pt-5">
   <div class="container">
     <div class="row align-items-center">
       <div class="col-lg-6 col-md-6 col-sm-8 ml-auto mr-auto">
