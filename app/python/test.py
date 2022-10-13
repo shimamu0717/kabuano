@@ -9,8 +9,8 @@ end_open_or_close = sys.argv[5]
 
 df = web.DataReader(code, 'yahoo', start_date, end_date)
 
-start_price = df.at[start_date,start_open_or_close]
-end_price = df.at[end_date,end_open_or_close]
+start_price = df.loc[start_date,start_open_or_close]
+end_price = df.loc[end_date,end_open_or_close]
 yield_price = end_price - start_price
 yield_ratio = round(yield_price/start_price*100,1)
 high = df['High'].max()

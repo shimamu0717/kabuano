@@ -37,15 +37,16 @@ class AnalyzeController extends Controller
             'code' => 'required | numeric',
             'start_date' => 'required | date | before_or_equal:today |  before_or_equal:end_date',
             'end_date' => 'required | date | before_or_equal:today | after_or_equal:start_date',
-        ]);
-        $path = app_path() . "/python/test.py";
+	]);
+
+	$path = app_path() . "/python/test.py";
         $code = $request->code;
         $star_date = $request->start_date;
         $start_open_or_close = $request->start_open_or_close;
         $end_date = $request->end_date;
         $end_open_or_close = $request->end_open_or_close;
-        $command =  "python3 " . $path . " $code" . " $star_date" . " $start_open_or_close" . " $end_date" . " $end_open_or_close";
-        exec($command, $output);
+        $command =  "/usr/bin/python3 " . $path . " $code" . " $star_date" . " $start_open_or_close" . " $end_date" . " $end_open_or_close";
+	exec($command, $output);
 
         if (empty($output)){
             return back()->withInput()->with('no_data', '銘柄コード、日付を正しく入力してください');
