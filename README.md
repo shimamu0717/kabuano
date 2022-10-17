@@ -1,64 +1,76 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# kabuano
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## URL
+<http://kabuano.net/>
 
-## About Laravel
+ゲストログインは<br>
+email:guest@guest.com<br>
+password:guest0000<br>
+<br>
+銘柄と過去の日付を入力すると株価の分析ができるという株の分析アプリです。<br>
+あの時あの株を買っていると今いくらだろう？<br>
+あのニュースが出た時に買って、ある時まで持ち続けたらいくら利益が出るだろう。<br>
+など、取引履歴としてや株式投資の分析に活用できます。
+<br>
+<br>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 使い方
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+使い方はシンプルです。<br>
+TOPページの新規分析から入力フォームにとび、<br>
+「銘柄コード」「銘柄名」「開始日」「終了日」、それぞれの「始値」「終値」を入力し、<br>
+「コメント」欄に自由にコメントを入力して「分析開始」をクリック。<br>
+すると、価格、期間中の高安値、開始日から終了日までの比が表示されます。<br>
+<br>
+ログインするとその分析結果を保存し、一覧で見ることもできます。<br>
+また他の人の分析結果の閲覧やお気に入り機能で気に入った分析結果だけを集めることも。<br>
+<br>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 工夫したポイント
 
-## Learning Laravel
+### Pythonの活用
+株価を呼び出すために当初は株価などのＤＢを用意しようと考えておりましたが、株価は分割や併合により価値が変動することを考慮して、最新の情報を取ってこれるように、Pythonのpandas_datareaderライブラリを使って株価を呼び出せるようにしました。
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### お試し分析
+新規登録をする前に、試しに分析ができるように未ログインユーザーでも分析まではできるようにし、
+データの保存などは登録ユーザーのみができる機能としました。
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### ダッシュボードデザイン
+様々な機能の追加やモバイル対応など、今後も継続的に運用していく事を考え、ダッシュボードデザインにしました。
+これにより、今後機能を追加する際に、デザイン面はそこまで変えずに追加していけるので、素早く対応できると考えています。
+<br>
+<br>
 
-## Laravel Sponsors
+## 機能一覧
+- ユーザー登録機能
+- ログイン・ログアウト機能
+- Google OAuth認証機能
+- パスワード再設定メール送信機能
+- パスワード再設定機能
+- 株価分析機能
+- 分析投稿機能
+- 投稿編集・削除機能
+- 投稿閲覧機能
+- お気に入り機能
+- 投稿絞り込み機能（お気に入り、自分の投稿）
+<br>
+<br>
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+## 技術
 
-### Premium Partners
+- PHP(8.0.2)
+- Laravel(9.19)
+- Python(3.8.10)
+- Vue(3.2.37)
+- bootstrap(5.1.3)
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+### 開発環境
+- Windows(WSL2 Ubuntu20.04.4)
+- laravel sail
+- github
+- Visual Studio Code
 
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### インフラ
+- AWS(VPC,EC2,Route53)
+- Nginx
+- MySQL
