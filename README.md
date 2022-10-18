@@ -15,6 +15,10 @@ password:guest0000<br>
 <br>
 
 ## 使い方
+<br>
+
+![Animation](https://user-images.githubusercontent.com/101461445/196454657-0aa2cf51-5273-4c13-bd96-dfee232ff2a2.gif)
+<br>
 
 使い方はシンプルです。<br>
 TOPページの新規分析から入力フォームにとび、<br>
@@ -57,6 +61,8 @@ TOPページの新規分析から入力フォームにとび、<br>
 <br>
 
 ## 技術
+
+![アーキテクチャ図](https://user-images.githubusercontent.com/101461445/196452680-71f2b283-6512-4116-9e3e-1b051b12917b.jpg)
 
 - PHP(8.0.2)
 - Laravel(9.19)
