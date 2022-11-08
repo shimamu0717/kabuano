@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\analyzeRequest;
 use App\Models\analyze;
 
 class AnalyzeController extends Controller
@@ -31,22 +32,17 @@ class AnalyzeController extends Controller
         return view('analyze.create');
     }
 
-    public function start(Request $request)
+    public function start(analyzeRequest $request)
     {
-        $request->validate([
-            'code' => 'required | numeric',
-            'start_date' => 'required | date | before_or_equal:today |  before_or_equal:end_date',
-            'end_date' => 'required | date | before_or_equal:today | after_or_equal:start_date',
-	]);
-
-	$path = app_path() . "/python/test.py";
-        $code = $request->code;
-        $star_date = $request->start_date;
-        $start_open_or_close = $request->start_open_or_close;
-        $end_date = $request->end_date;
-        $end_open_or_close = $request->end_open_or_close;
+        $validated = $request->validated();
+	    $path = app_path() . "/python/test.py";
+        $code = $validated['code'];
+        $star_date = $validated['start_date'];
+        $start_open_or_close = $validated['start_open_or_close'];
+        $end_date = $validated['end_date'];
+        $end_open_or_close = $validated['end_open_or_close'];
         $command =  "/usr/bin/python3 " . $path . " $code" . " $star_date" . " $start_open_or_close" . " $end_date" . " $end_open_or_close";
-	exec($command, $output);
+	    exec($command, $output);
 
         if (empty($output)){
             return back()->withInput()->with('no_data', '銘柄コード、日付を正しく入力してください');
@@ -79,28 +75,6 @@ class AnalyzeController extends Controller
         $analyze->user_id = $request->user()->id;
         $analyze->save();
         return redirect()->route('home');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**
