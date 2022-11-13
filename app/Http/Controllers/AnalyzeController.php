@@ -57,10 +57,10 @@ class AnalyzeController extends Controller
         ];
         $inputs = $request->except('_token');
 
-        $request->session()->put($inputs);
-        $request->session()->put($result);
+        // $request->session()->put($inputs);
+        // $request->session()->put($result);
 
-        return view('analyze.result');
+        return view('analyze.result', compact('inputs','result'));
     }
 
     /**
@@ -71,7 +71,8 @@ class AnalyzeController extends Controller
      */
     public function store(Request $request, analyze $analyze)
     {
-        $analyze->fill($request->session()->all());
+        $analyze->fill($request->inputs);
+        $analyze->fill($request->result);
         $analyze->user_id = $request->user()->id;
         $analyze->save();
         return redirect()->route('home');

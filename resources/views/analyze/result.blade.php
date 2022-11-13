@@ -18,10 +18,10 @@
                   <label id="code">
                       銘柄コード
                   </label>
-                  <p>{{ session('code') }}</p>
+                  <p>{{ $inputs['code']}}</p>
                 </div>
                 <div class="col-9">
-                  <h3>{{ session('company') }}</h3>
+                  <h3>{{ $inputs['company'] }}</h3>
                 </div>
               </div>
               <div class="bmd-form-group">
@@ -30,13 +30,13 @@
                 </label>
                 <div class="row">
                   <div class="col-3 align-self-center">
-                    <p>{{ session('start_date') }}</p>
+                    <p>{{ $inputs['start_date'] }}</p>
                   </div>
                   <div class="col-2 align-self-center">
-                    <p>{{ session('start_open_or_close') === 'Open' ? '始値' : '終値'}}</p>
+                    <p>{{ $inputs['start_open_or_close'] === 'Open' ? '始値' : '終値'}}</p>
                   </div>
                   <div class="col-4">
-                    <h3>{{ session('start_price') }} 円</h3>
+                    <h3>{{ $result['start_price'] }} 円</h3>
                   </div>
                 </div>
               </div>
@@ -46,29 +46,29 @@
                 </label>
                 <div class="row">
                   <div class="col-3 align-self-center">
-                    <p>{{ session('end_date') }}</p>
+                    <p>{{ $inputs['end_date'] }}</p>
                   </div>
                   <div class="col-2 align-self-center">
-                    <p>{{ session('end_open_or_close') === 'Open' ? '始値' : '終値'}}</p>
+                    <p>{{ $inputs['end_open_or_close'] === 'Open' ? '始値' : '終値'}}</p>
                   </div>
                   <div class="col-4">
-                    <h3>{{ session('end_price') }} 円</h3>
+                    <h3>{{ $result['end_price'] }} 円</h3>
                   </div>
                 </div>
               </div>
               <div class="row mt-2">
                 <div class="col-3"><label id="low">期間中高値</label></div>
-                <div class="col-9"><span class="h4">{{ session('high') }}</span> 円</div>
+                <div class="col-9"><span class="h4">{{ $result['high'] }}</span> 円</div>
               </div>
               <div class="row">
                 <div class="col-3"><label id="low">期間中安値</label></div>
-                <div class="col-9"><span class="h4">{{ session('low') }}</span> 円</div>
+                <div class="col-9"><span class="h4">{{ $result['low'] }}</span> 円</div>
               </div>
               <div class="row mt-2">
                 <div class="col-2"><label id="yield">開始日比</label></div>
-                <div class="col-4 h3">{{ session('yield')}}円</div>
+                <div class="col-4 h3">{{ $result['yield'] }}円</div>
                 <div class="col-2"><label id="yield_ratio">比率</label></div>
-                <div class="col-4 h3">{{ session('yield_ratio')}}％</div>
+                <div class="col-4 h3">{{ $result['yield_ratio'] }}％</div>
               </div>
               <div class="row mt-2">
 
@@ -79,11 +79,11 @@
                   <label id="comment">
                       コメント
                   </label>
-                  <p>{{ session('comment') }}</p>
+                  <p>{{ $inputs['comment'] }}</p>
               </div>
               <div class="card-footer justify-content-center">
                 @auth
-                <button type="submit"  formmethod="POST" formaction="{{ route('analyze.store') }}" class="btn btn-info btn-lg mr-4">{{ __('　保存　') }}</button>
+                <button type="submit"  formmethod="POST" formaction="{{ route('analyze.store', ['inputs' => $inputs, 'result' => $result]) }}" class="btn btn-info btn-lg mr-4">{{ __('　保存　') }}</button>
                 @endauth
                 @guest
                 <button type="submit"  formmethod="GET" formaction="{{ route('login') }}" class="btn btn-info btn-lg mr-4">{{ __('ログイン') }}</button>
