@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\analyzeRequest;
+use App\Http\Requests\AnalyzeRequest;
 use App\Models\analyze;
 
 class AnalyzeController extends Controller
@@ -32,7 +32,7 @@ class AnalyzeController extends Controller
         return view('analyze.create');
     }
 
-    public function start(analyzeRequest $request)
+    public function start(AnalyzeRequest $request)
     {
         $validated = $request->validated();
 	    $path = app_path() . "/python/test.py";

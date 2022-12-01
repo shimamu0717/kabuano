@@ -6,10 +6,8 @@
   <div class="container">
     <div class="row align-items-center">
       <div class="col-lg-6 col-md-6 col-sm-8 ml-auto mr-auto">
-        <form class="form">
-          @csrf
-          <div class="card card-hidden mb-3">
-            <div class="card-header card-header-info text-center">
+        <div class="card card-hidden mb-3">
+          <div class="card-header card-header-info text-center">
               <h4 class="card-title"><strong>分析結果</strong></h4>
             </div>
             <div class="card-body ">
@@ -70,29 +68,34 @@
                 <div class="col-2"><label id="yield_ratio">比率</label></div>
                 <div class="col-4 h3">{{ $result['yield_ratio'] }}％</div>
               </div>
-              <div class="row mt-2">
+            <div class="row mt-2">
 
 
-              </div>
+            </div>
 
-              <div class="bmd-form-group pt-1">
-                  <label id="comment">
-                      コメント
-                  </label>
-                  <p>{{ $inputs['comment'] }}</p>
-              </div>
-              <div class="card-footer justify-content-center">
-                @auth
-                <button type="submit"  formmethod="POST" formaction="{{ route('analyze.store', ['inputs' => $inputs, 'result' => $result]) }}" class="btn btn-info btn-lg mr-4">{{ __('　保存　') }}</button>
-                @endauth
-                @guest
-                <button type="submit"  formmethod="GET" formaction="{{ route('login') }}" class="btn btn-info btn-lg mr-4">{{ __('ログイン') }}</button>
-                @endguest
-                <button type="submit" formmethod="GET" formaction="{{ route('analyze.create') }}" class="btn btn-outline-info btn-lg ml-4">{{ __('キャンセル') }}</button>
-              </div>
+            <div class="bmd-form-group pt-1">
+                <label id="comment">
+                  コメント
+                </label>
+                <p>{{ $inputs['comment'] }}</p>
+            </div>
+            <div class="card-footer justify-content-center">
+              @auth
+              <form class="form" method="POST" action="{{ route('analyze.store', ['inputs' => $inputs, 'result' => $result]) }}">
+                  <button type="submit" class="btn btn-info btn-lg mr-4">{{ __('　保存　') }}</button>
+              </form>
+              @endauth
+              @guest
+              <form class="form" method="GET" action="{{ route('login') }}">
+                  <button type="submit" class="btn btn-info btn-lg mr-4">{{ __('ログイン') }}</button>
+              </form>
+              @endguest
+              <form class="form" method="GET" action="{{ route('analyze.create') }}">
+                  <button type="submit" class="btn btn-outline-info btn-lg ml-4">{{ __('キャンセル') }}</button>
+              </form>
             </div>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   </div>
